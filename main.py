@@ -10,6 +10,18 @@ duration = len(data)/fs
 t = np.linspace(0, duration, len(data))
 
 #Plot sample in time domain
-plt.figure()
-plt.plot(t, data)
+plt.figure(1)
+tplot = plt.plot(t, data)
+tplot = plt.xlabel("Time (s)")
+tplot = plt.ylabel("Amplitude")
+
+#Plot sample in frequency domain log(x-axis) and log(y-axis)
+dataf = np.fft.fft(data)
+f = np.linspace(0, fs, len(dataf))
+plt.figure(2)
+fplot = plt.plot(f, abs(dataf))
+fplot = plt.xlabel("Frequency (Hz)")
+fplot = plt.ylabel("Magnitude")
+plt.xscale("log")
+plt.yscale("log")
 plt.show()
