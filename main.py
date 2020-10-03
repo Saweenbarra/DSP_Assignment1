@@ -3,7 +3,7 @@ import scipy.io.wavfile as wavfile
 import matplotlib.pyplot as plt
 
 #Load wav file sample frequency and data
-fs, data = wavfile.read("Potatoes.wav")
+fs, data = wavfile.read("Vowel.wav")
 
 #Calculate duration of sample and create time (x-axis) array
 duration = len(data)/fs
