@@ -33,7 +33,7 @@ k1 = int(len(dataf)/44100*6000)
 k2 = int(len(dataf)/44100*10000)
 
 #Amplify selected frequencies by factor
-dataf[k1:k2+1] *= 1.00001
+dataf[k1:k2+1] *= 20
 
 #Plot new amplified FFT
 plt.figure(3)
@@ -46,6 +46,9 @@ plt.yscale("log")
 #Convert boosted signal to time domain
 dataBoost = np.fft.ifft(dataf)
 dataBoost = np.real(dataBoost)
+
+#Cast 64bit floats to int to be written to wav file
+dataBoost = dataBoost.astype(np.int16)
 
 #Plot boosted signal in time domain
 plt.figure(4)
