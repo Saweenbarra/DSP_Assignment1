@@ -29,6 +29,7 @@ fplot = plt.xlabel("Frequency (Hz)")
 fplot = plt.ylabel("Magnitude")
 plt.xscale("log")
 plt.yscale("log")
+plt.xlim(0, fs/2)
 
 #Find sample numbers corresponding to 6kHz and 10kHz
 k1 = int(len(dataf)/fs*6000)
@@ -51,6 +52,7 @@ bfplot = plt.xlabel("Frequency (Hz)")
 bfplot = plt.ylabel("Magnitude")
 plt.xscale("log")
 plt.yscale("log")
+plt.xlim(0, fs/2)
 
 #Convert boosted signal to time domain
 dataBoost = np.fft.ifft(dataf)
