@@ -3,7 +3,7 @@ import scipy.io.wavfile as wavfile
 import matplotlib.pyplot as plt
 
 #Load wav file sample frequency and data
-fs, data = wavfile.read("potatoes.wav")
+fs, data = wavfile.read("original.wav")
 
 #Calculate duration of sample and create time (x-axis) array
 duration = len(data)/fs
@@ -64,5 +64,5 @@ btplot = plt.xlabel("Time (s)")
 btplot = plt.ylabel("Amplitude")
 
 #Write boosted signal to wav file
-wavfile.write("PotatoesBoost.wav", fs, dataBoost)
+wavfile.write("improved.wav", fs, dataBoost)
 plt.show()
