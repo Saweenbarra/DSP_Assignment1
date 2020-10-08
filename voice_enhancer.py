@@ -42,7 +42,7 @@ dataf[k1:k2+1] *= 20
 k1 = int(len(dataf)/fs*85)
 k2 = int(len(dataf)/fs*180)
 
-##Amplify selected frequencies by factor
+#Amplify selected frequencies by factor
 dataf[k1:k2+1] *= 5
 
 #Plot new amplified FFT
