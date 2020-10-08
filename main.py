@@ -3,15 +3,17 @@ import scipy.io.wavfile as wavfile
 import matplotlib.pyplot as plt
 
 #Load wav file sample frequency and data
-fs, data = wavfile.read("potatoes.wav")
+fs, data = wavfile.read("Potatoes.wav")
 
 #Calculate duration of sample and create time (x-axis) array
 duration = len(data)/fs
 t = np.linspace(0, duration, len(data))
 
+normaliser = (pow(2,16)-1)
+
 #Plot sample in time domain
 plt.figure(1)
-tplot = plt.plot(t, data)
+tplot = plt.plot(t, data/normaliser)
 tplot = plt.xlabel("Time (s)")
 tplot = plt.ylabel("Amplitude")
 
@@ -22,7 +24,7 @@ f = np.linspace(0, fs, len(dataf))
 
 #Plot sample in frequency domain log(x-axis) and log(y-axis)
 plt.figure(2)
-fplot = plt.plot(f, abs(dataf))
+fplot = plt.plot(f, abs(dataf)/len(dataf))
 fplot = plt.xlabel("Frequency (Hz)")
 fplot = plt.ylabel("Magnitude")
 plt.xscale("log")
@@ -44,7 +46,7 @@ dataf[k1:k2+1] *= 5
 
 #Plot new amplified FFT
 plt.figure(3)
-bfplot = plt.plot(f, abs(dataf))
+bfplot = plt.plot(f, abs(dataf)/len(dataf))
 bfplot = plt.xlabel("Frequency (Hz)")
 bfplot = plt.ylabel("Magnitude")
 plt.xscale("log")
@@ -59,7 +61,7 @@ dataBoost = dataBoost.astype(np.int16)
 
 #Plot boosted signal in time domain
 plt.figure(4)
-btplot = plt.plot(t, dataBoost)
+btplot = plt.plot(t, dataBoost/normaliser)
 btplot = plt.xlabel("Time (s)")
 btplot = plt.ylabel("Amplitude")
 
