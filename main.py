@@ -3,7 +3,7 @@ import scipy.io.wavfile as wavfile
 import matplotlib.pyplot as plt
 
 #Load wav file sample frequency and data
-fs, data = wavfile.read("Potatoes.wav")
+fs, data = wavfile.read("potatoes.wav")
 
 #Calculate duration of sample and create time (x-axis) array
 duration = len(data)/fs
@@ -29,8 +29,8 @@ plt.xscale("log")
 plt.yscale("log")
 
 #Find sample numbers corresponding to 6kHz and 10kHz
-k1 = int(len(dataf)/44100*6000)
-k2 = int(len(dataf)/44100*10000)
+k1 = int(len(dataf)/fs*6000)
+k2 = int(len(dataf)/fs*10000)
 
 #Amplify selected frequencies by factor
 dataf[k1:k2+1] *= 20
