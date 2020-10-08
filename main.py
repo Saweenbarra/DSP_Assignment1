@@ -35,6 +35,13 @@ k2 = int(len(dataf)/fs*10000)
 #Amplify selected frequencies by factor
 dataf[k1:k2+1] *= 20
 
+#Find sample numbers corresponding to 85Hz and 180Hz
+k1 = int(len(dataf)/fs*85)
+k2 = int(len(dataf)/fs*180)
+
+##Amplify selected frequencies by factor
+dataf[k1:k2+1] *= 5
+
 #Plot new amplified FFT
 plt.figure(3)
 bfplot = plt.plot(f, abs(dataf))
