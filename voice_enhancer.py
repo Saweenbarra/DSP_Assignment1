@@ -19,6 +19,7 @@ tplot = plt.ylabel("Amplitude")
 
 #Calculate discreet fourier transform of data
 dataf = np.fft.fft(data)
+
 #Create frequency axis
 f = np.linspace(0, fs, len(dataf))
 
