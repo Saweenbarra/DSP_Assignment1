@@ -74,4 +74,4 @@ btplot = plt.ylabel("Amplitude")
 
 #Write boosted signal to wav file
 wavfile.write("improved.wav", fs, dataBoost)
-plt.show()
+plt.show() #Plot all 4 graphs
