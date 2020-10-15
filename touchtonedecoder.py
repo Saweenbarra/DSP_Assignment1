@@ -12,7 +12,12 @@ wavfile.write("touchtones.wav", fs, touchtones[:,1])
 oldi = 0
 seperate_tones = []
 j = 0
-fd_freqs = [[303, 230, 148, 59, 209, 336, 477],[1,2,3,4,5,6,7]] #fold down frequancies corresponding to tone frequancies
+fd_freqs = [303, 230, 148, 59, 209, 336, 477] #fold down frequancies corresponding to tone frequancies
+keys = [['1','2','3'],
+        ['4','5','6'],
+        ['7','8','9'],
+        ['*','0','#']]
+
 
 def Tone_ID(touchtone):
     f_touchtone = np.fft.fft(touchtone)
@@ -22,16 +27,21 @@ def Tone_ID(touchtone):
     f_touchtonedB = 20*np.log10(abs(f_touchtone)*2/len(f_touchtone)/(pow(2,15)-1))
     peaks = np.where(f_touchtonedB[1:k1] > np.max(f_touchtonedB[1:k1]) - 5)
     peaks = list(peaks[0])
-
     peaks = np.delete(peaks, np.argwhere(np.ediff1d(peaks) <= 1) + 1) #remove consecutive peaks which are within 1 of each other
+
+    indices = [0,0]
 
     for i in range(len(peaks)):
         peaks[i] = peaks[i]*fs/len(f_touchtone)
-        for j in range(len(fd_freqs[0])):  
-            if math.isclose(peaks[i],fd_freqs[0][j],rel_tol = 0.05,abs_tol=10):
-                print(fd_freqs[0][j],fd_freqs[1][j])
+        for j in range(len(fd_freqs)):  
+            if math.isclose(peaks[i],fd_freqs[j],rel_tol = 0.05,abs_tol=10):
+                if j < 4:
+                    indices[0] = j
+                if j > 3:
+                    indices[1] = j-4
+                print('frequancies',fd_freqs[j])
 
-    print(peaks)
+    print('key:',keys[indices[0]][indices[1]])
 
     plt.figure(2)
     fplot = plt.plot(f, f_touchtonedB)
