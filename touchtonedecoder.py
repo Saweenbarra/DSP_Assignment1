@@ -29,9 +29,3 @@ for i in range(len(seperate_tones)):
 tplot = plt.xlabel("Time (ms)")
 tplot = plt.ylabel("Amplitude")
 plt.show()
-
-
-
-Dial_detector(touchtones[:,1])
-
-#def Dial_Identifier():
