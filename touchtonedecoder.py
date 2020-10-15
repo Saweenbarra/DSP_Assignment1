@@ -22,12 +22,13 @@ def Tone_ID(touchtone):
     f_touchtonedB = 20*np.log10(abs(f_touchtone)*2/len(f_touchtone)/(pow(2,15)-1))
     peaks = np.where(f_touchtonedB[1:k1] > np.max(f_touchtonedB[1:k1])-10)
     peaks = list(peaks)
-    for i in range(len(peaks)):
-        peaks[i] = peaks[i]*fs/len(f_touchtone)
-        for j in range(len(freqs)):   
-            if math.isclose(peaks[i][0],freqs[j],rel_tol = 0.15):
-                peaks[i] = freqs[j]
-                #print(freqs[j])
+    for i in range(len(peaks[0])):
+        peaks[0][i] = peaks[0][i]*fs/len(f_touchtone)
+        for j in range(len(freqs)):  
+            a = peaks[0][i] 
+            if math.isclose(a,freqs[j],rel_tol = 0.3,abs_tol=10):
+                #peaks[i] = freqs[j]
+                print(freqs[j])
 
     print(peaks)
 
