@@ -39,14 +39,16 @@ k1 = int(len(dataf)/fs*85)
 k2 = int(len(dataf)/fs*180)
 
 #Amplify selected frequencies by factor
-dataf[k1:k2+1] *= 2
+dataf[k1:k2+1] *= 1.2
+dataf[k2-1:-k1] *= 1.2
 
 #Find sample numbers corresponding to 6kHz and 10kHz
 k1 = int(len(dataf)/fs*6000)
 k2 = int(len(dataf)/fs*10000)
 
 #Amplify selected frequencies by factor
-dataf[k1:k2+1] *= 10
+dataf[k1:k2+1] *= 3
+dataf[-k2-1:-k1] *= 3
 
 #Convert FFT data to decibels relative to full scale (dBFS)
 datafdB = 20*np.log10(abs(dataf)*2/len(dataf)/normaliser)
