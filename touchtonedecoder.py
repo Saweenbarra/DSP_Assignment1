@@ -13,10 +13,11 @@ oldi = 0
 seperate_tones = []
 j = 0
 fd_freqs = [303, 230, 148, 59, 209, 336, 477] #fold down frequancies corresponding to tone frequancies
-keys = [['1','2','3'],
-        ['4','5','6'],
-        ['7','8','9'],
-        ['*','0','#']]
+keys = [['1','2','3','error'],
+        ['4','5','6','error'],
+        ['7','8','9','error'],
+        ['*','0','#','error'],
+        ['error','error','error','error',]]
 
 
 def Tone_ID(touchtone):
@@ -29,7 +30,7 @@ def Tone_ID(touchtone):
     peaks = list(peaks[0])
     peaks = np.delete(peaks, np.argwhere(np.ediff1d(peaks) <= 1) + 1) #remove consecutive peaks which are within 1 of each other
 
-    indices = [0,0]
+    indices = [4,3]
 
     for i in range(len(peaks)):
         peaks[i] = peaks[i]*fs/len(f_touchtone)
@@ -39,8 +40,7 @@ def Tone_ID(touchtone):
                     indices[0] = j
                 if j > 3:
                     indices[1] = j-4
-                print('frequancies',fd_freqs[j])
-
+    
     print('key:',keys[indices[0]][indices[1]])
 
     plt.figure(2)
