@@ -12,7 +12,7 @@ wavfile.write("touchtones.wav", fs, touchtones[:,1])
 oldi = 0
 seperate_tones = []
 j = 0
-freqs = [303, 230, 148, 59, 209, 336, 447]
+fd_freqs = [[303, 230, 148, 59, 209, 336, 477],[1,2,3,4,1,2,3]] #fold down frequancies corresponding to tone frequancies
 
 def Tone_ID(touchtone):
     f_touchtone = np.fft.fft(touchtone)
@@ -23,21 +23,21 @@ def Tone_ID(touchtone):
     peaks = np.where(f_touchtonedB[1:k1] > np.max(f_touchtonedB[1:k1]) - 5)
     peaks = list(peaks[0])
 
-    peaks = np.delete(peaks, np.argwhere(np.ediff1d(peaks) <= 1) + 1)
+    peaks = np.delete(peaks, np.argwhere(np.ediff1d(peaks) <= 1) + 1) #remove consecutive peaks which are within 1 of each other
 
     for i in range(len(peaks)):
         peaks[i] = peaks[i]*fs/len(f_touchtone)
-        for j in range(len(freqs)):  
-            if math.isclose(peaks[i],freqs[j],rel_tol = 0.055,abs_tol=10):
-                print(freqs[j])
+        for j in range(len(fd_freqs[0])):  
+            if math.isclose(peaks[i],fd_freqs[0][j],rel_tol = 0.05,abs_tol=10):
+                print(fd_freqs[0][j],fd_freqs[1][j])
 
     print(peaks)
 
-    #plt.figure(2)
-    #fplot = plt.plot(f, f_touchtonedB)
-    #fplot = plt.xlabel("Frequency (Hz)")
-    #fplot = plt.ylabel("FS")
-    #plt.xlim(right = fs/2,left = 1)
+    plt.figure(2)
+    fplot = plt.plot(f, f_touchtonedB)
+    fplot = plt.xlabel("Frequency (Hz)")
+    fplot = plt.ylabel("FS")
+    plt.xlim(right = fs/2,left = 1)
     
 
 for i in range(len(touchtones[:,1])):
@@ -52,10 +52,10 @@ for i in range(len(touchtones[:,1])):
             oldi = i
 
 #Tone_ID(seperate_tones[0][:,1])
-#plt.figure(1)
-#tplot = plt.plot(touchtones[:,0], touchtones[:,1])
-#for i in range(len(seperate_tones)):
-#    tplot = plt.plot(seperate_tones[i][:,0], seperate_tones[i][:,1],'r')
-#tplot = plt.xlabel("Time (ms)")
-#tplot = plt.ylabel("Amplitude")
+plt.figure(1)
+tplot = plt.plot(touchtones[:,0], touchtones[:,1])
+for i in range(len(seperate_tones)):
+    tplot = plt.plot(seperate_tones[i][:,0], seperate_tones[i][:,1],'r')
+tplot = plt.xlabel("Time (ms)")
+tplot = plt.ylabel("Amplitude")
 #plt.show()
