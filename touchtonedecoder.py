@@ -25,15 +25,17 @@ def Tone_ID(touchtone):
     for i in range(len(peaks)):
         peaks[i] = peaks[i]*fs/len(f_touchtone)
         for j in range(len(freqs)):   
-            if math.isclose(peaks[i],freqs[j],rel_tol = 0.1):
+            if math.isclose(peaks[i][0],freqs[j],rel_tol = 0.15):
                 peaks[i] = freqs[j]
+                #print(freqs[j])
 
     print(peaks)
-    plt.figure(2)
-    fplot = plt.plot(f, f_touchtonedB)
-    fplot = plt.xlabel("Frequency (Hz)")
-    fplot = plt.ylabel("FS")
-    plt.xlim(right = fs/2,left = 1)
+
+    #plt.figure(2)
+    #fplot = plt.plot(f, f_touchtonedB)
+    #fplot = plt.xlabel("Frequency (Hz)")
+    #fplot = plt.ylabel("FS")
+    #plt.xlim(right = fs/2,left = 1)
     
 
 for i in range(len(touchtones[:,1])):
@@ -48,10 +50,10 @@ for i in range(len(touchtones[:,1])):
             oldi = i
 
 Tone_ID(seperate_tones[0][:,1])
-plt.figure(1)
+#plt.figure(1)
 #tplot = plt.plot(touchtones[:,0], touchtones[:,1])
-for i in range(len(seperate_tones)):
-    tplot = plt.plot(seperate_tones[i][:,0], seperate_tones[i][:,1],'r')
-tplot = plt.xlabel("Time (ms)")
-tplot = plt.ylabel("Amplitude")
-plt.show()
+#for i in range(len(seperate_tones)):
+#    tplot = plt.plot(seperate_tones[i][:,0], seperate_tones[i][:,1],'r')
+#tplot = plt.xlabel("Time (ms)")
+#tplot = plt.ylabel("Amplitude")
+#plt.show()
