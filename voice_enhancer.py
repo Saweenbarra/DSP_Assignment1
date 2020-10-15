@@ -40,7 +40,7 @@ k2 = int(len(dataf)/fs*180)
 
 #Amplify selected frequencies by factor
 dataf[k1:k2+1] *= 1.2
-dataf[k2-1:-k1] *= 1.2
+dataf[-k2-1:-k1] *= 1.2
 
 #Find sample numbers corresponding to 6kHz and 10kHz
 k1 = int(len(dataf)/fs*6000)
