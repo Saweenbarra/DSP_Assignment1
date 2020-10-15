@@ -26,7 +26,7 @@ def Tone_ID(touchtone):
         peaks[0][i] = peaks[0][i]*fs/len(f_touchtone)
         for j in range(len(freqs)):  
             a = peaks[0][i] 
-            if math.isclose(a,freqs[j],rel_tol = 0.3,abs_tol=10):
+            if math.isclose(a,freqs[j],rel_tol = 0.05,abs_tol=10):
                 #peaks[i] = freqs[j]
                 print(freqs[j])
 
