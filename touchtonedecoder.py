@@ -1,6 +1,4 @@
 import numpy as np
-import scipy.io.wavfile as wavfile
-import matplotlib.pyplot as plt
 import math
 
 fs = 1000
@@ -14,7 +12,6 @@ keys = [['1','2','3','error'],
         ['7','8','9','error'],
         ['*','0','#','error'],
         ['error','error','error','error',]]
-
 
 def Tone_ID(touchtone):
     f_touchtone = np.fft.fft(touchtone)
