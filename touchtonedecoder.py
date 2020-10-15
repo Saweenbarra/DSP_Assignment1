@@ -20,14 +20,15 @@ def Tone_ID(touchtone):
     k1 = int(len(f_touchtone)/fs*500)
     
     f_touchtonedB = 20*np.log10(abs(f_touchtone)*2/len(f_touchtone)/(pow(2,15)-1))
-    peaks = np.where(f_touchtonedB[1:k1] > np.max(f_touchtonedB[1:k1])-10)
-    peaks = list(peaks)
-    for i in range(len(peaks[0])):
-        peaks[0][i] = peaks[0][i]*fs/len(f_touchtone)
+    peaks = np.where(f_touchtonedB[1:k1] > np.max(f_touchtonedB[1:k1]) - 5)
+    peaks = list(peaks[0])
+
+    peaks = np.delete(peaks, np.argwhere(np.ediff1d(peaks) <= 1) + 1)
+
+    for i in range(len(peaks)):
+        peaks[i] = peaks[i]*fs/len(f_touchtone)
         for j in range(len(freqs)):  
-            a = peaks[0][i] 
-            if math.isclose(a,freqs[j],rel_tol = 0.05,abs_tol=10):
-                #peaks[i] = freqs[j]
+            if math.isclose(peaks[i],freqs[j],rel_tol = 0.055,abs_tol=10):
                 print(freqs[j])
 
     print(peaks)
@@ -47,10 +48,10 @@ for i in range(len(touchtones[:,1])):
         if j > 10:
             if i > oldi + 20:
                 seperate_tones.append(touchtones[oldi:(i-10)])
-                #Tone_ID(touchtones[oldi:(i-10)][:,1])
+                Tone_ID(touchtones[oldi:(i-10)][:,1])
             oldi = i
 
-Tone_ID(seperate_tones[0][:,1])
+#Tone_ID(seperate_tones[0][:,1])
 #plt.figure(1)
 #tplot = plt.plot(touchtones[:,0], touchtones[:,1])
 #for i in range(len(seperate_tones)):
