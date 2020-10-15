@@ -7,15 +7,14 @@ touchtones[:,1] = touchtones[:,1].astype(np.int16)
 oldi = 0
 j = 0
 fd_freqs = [303, 230, 148, 59, 209, 336, 477] #fold down frequancies corresponding to tone frequancies
-keys = [['1','2','3','error'],
-        ['4','5','6','error'],
-        ['7','8','9','error'],
-        ['*','0','#','error'],
+keys = [[  '1',    '2',    '3',  'error'],
+        [  '4',    '5',    '6',  'error'],
+        [  '7',    '8',    '9',  'error'],
+        [  '*',    '0',    '#',  'error'],
         ['error','error','error','error',]]
 
 def Tone_ID(touchtone):
     f_touchtone = np.fft.fft(touchtone)
-    f = np.linspace(0, fs, len(f_touchtone))
     k1 = int(len(f_touchtone)/fs*500)
     
     f_touchtonedB = 20*np.log10(abs(f_touchtone)*2/len(f_touchtone)/(pow(2,15)-1))
