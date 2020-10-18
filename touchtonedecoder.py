@@ -38,7 +38,7 @@ def Tone_ID(touchtone):
 for i in range(len(touchtones[:,1])):
     if(touchtones[:,1][i] > 3300 or touchtones[:,1][i] < 3200):
         j = 0    
-    if(touchtones[:,1][i] < 3300 and touchtones[:,1][i] > 3200):
+    else:
         j += 1
         if j > 10:
             if i > oldi + 20:

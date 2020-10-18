@@ -50,17 +50,6 @@ k2 = int(len(dataf)/fs*10000)
 dataf[k1:k2+1] *= 3
 dataf[-k2-1:-k1] *= 3
 
-#Convert FFT data to decibels relative to full scale (dBFS)
-datafdB = 20*np.log10(abs(dataf)*2/len(dataf)/normaliser)
-
-#Plot new amplified FFT
-plt.figure(3)
-bfplot = plt.plot(f, datafdB)
-bfplot = plt.xlabel("Frequency (Hz)")
-bfplot = plt.ylabel("dBFS")
-plt.xscale("log")
-plt.xlim(right = fs/2) #Don't plot data after nyquist because it doesn't exist
-
 #Convert boosted signal to time domain
 dataBoost = np.fft.ifft(dataf)
 dataBoost = np.real(dataBoost)
@@ -68,12 +57,6 @@ dataBoost = np.real(dataBoost)
 #Cast 64bit floats to int to be written to wav file
 dataBoost = dataBoost.astype(np.int16)
 
-#Plot boosted signal in time domain
-plt.figure(4)
-btplot = plt.plot(t, dataBoost/(pow(2,15)-1))
-btplot = plt.xlabel("Time (s)")
-btplot = plt.ylabel("Amplitude")
-
 #Write boosted signal to wav file
 wavfile.write("improved.wav", fs, dataBoost)
-plt.show() #Plot all 4 graphs
+plt.show() #Plot all graphs
