@@ -11,7 +11,7 @@ keys = [[  '1',    '2',    '3',  'error'],
         [  '4',    '5',    '6',  'error'],
         [  '7',    '8',    '9',  'error'],
         [  '*',    '0',    '#',  'error'],
-        ['error','error','error','error',]]
+        ['error','error','error','error']]
 
 def Tone_ID(touchtone):
     f_touchtone = np.fft.fft(touchtone)
@@ -30,7 +30,7 @@ def Tone_ID(touchtone):
             if math.isclose(peaks[i],fd_freqs[j],rel_tol = 0.05,abs_tol=10):
                 if j < 4:
                     indices[0] = j
-                if j > 3:
+                else:
                     indices[1] = j-4
     
     print('key:',keys[indices[0]][indices[1]])
