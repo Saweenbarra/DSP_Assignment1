@@ -17,7 +17,7 @@ def Tone_ID(touchtone):
     f_touchtone = np.fft.fft(touchtone)
     k1 = int(len(f_touchtone)/fs*500)
     
-    f_touchtonedB = 20*np.log10(abs(f_touchtone)*2/len(f_touchtone)/(pow(2,15)-1))
+    f_touchtonedB = 20*np.log10(abs(f_touchtone)*2/len(f_touchtone)/(pow(2,12)-1))
     peaks = np.where(f_touchtonedB[1:k1] > np.max(f_touchtonedB[1:k1]) - 5)
     peaks = list(peaks[0])
     peaks = np.delete(peaks, np.argwhere(np.ediff1d(peaks) <= 1) + 1) #remove consecutive peaks which are within 1 of each other
